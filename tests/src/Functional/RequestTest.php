@@ -191,7 +191,7 @@ class RequestTest extends BrowserTestBase {
       $expected = file_get_contents($file_name);
       // Compare decoded json to so that failure will indicate which element is
       // incorrect.
-      $this->assertEquals(json_decode($expected, TRUE), json_decode($contents, TRUE));
+      $this->assertEquals(json_decode($expected, TRUE), json_decode($contents, TRUE), "Response did not match expected file: $file_name");
     }
   }
 
