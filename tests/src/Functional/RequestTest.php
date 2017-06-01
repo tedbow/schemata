@@ -193,11 +193,12 @@ class RequestTest extends BrowserTestBase {
       $expected = json_decode(file_get_contents($file_name), TRUE);
       $decoded_response = json_decode($contents, TRUE);
       if (empty($decoded_response)) {
+        $this->assertTrue(FALSE, "RESPONSE BODY: " . var_export($response->getBody(), TRUE));
         if (!empty($contents)) {
-          $this->assertTrue(FALSE, "CONTENTS NOT DECODED: $contents");
+          $this->assertTrue(FALSE, "CONTENTS NOT DECODED: " . var_export($contents, TRUE));
         }
         else {
-          $this->assertTrue(FALSE, "CONTENTS NOT EMPTY: $contents");
+          $this->assertTrue(FALSE, "CONTENTS EMPTY: $contents");
         }
       }
 
