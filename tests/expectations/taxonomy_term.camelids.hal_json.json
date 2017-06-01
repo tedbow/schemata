@@ -1,6 +1,6 @@
 {
   "$schema": "http:\/\/json-schema.org\/draft-04\/schema#",
-  "id": "http:\/\/www.octo2.dev\/d8_openapi\/schemata\/taxonomy_term\/camelids?_format=schema_json&_describes=hal_json",
+  "id": "{base_url}\/schemata\/taxonomy_term\/camelids?_format=schema_json&_describes=hal_json",
   "type": "object",
   "title": "taxonomy_term:camelids Schema",
   "description": "Describes the payload for 'taxonomy_term' entities of the 'camelids' bundle.",

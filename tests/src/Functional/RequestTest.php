@@ -188,10 +188,21 @@ class RequestTest extends BrowserTestBase {
       else {
         $file_name .= "$entity_type_id.$format.json";
       }
-      $expected = file_get_contents($file_name);
       // Compare decoded json to so that failure will indicate which element is
       // incorrect.
-      $this->assertEquals(json_decode($expected, TRUE), json_decode($contents, TRUE), "Response did not match expected file: $file_name");
+      $expected = json_decode(file_get_contents($file_name), TRUE);
+      $decoded_response = json_decode($contents, TRUE);
+      if (empty($decoded_response)) {
+        if (!empty($contents)) {
+          $this->assertTrue(FALSE, "CONTENTS NOT DECODED: $contents");
+        }
+        else {
+          $this->assertTrue(FALSE, "CONTENTS NOT EMPTY: $contents");
+        }
+      }
+
+      $expected['id'] = str_replace('{base_url}', $this->baseUrl, $expected['id']);
+      $this->assertEquals($expected, $decoded_response, "Response did not match expected file: $file_name");
     }
   }
 
