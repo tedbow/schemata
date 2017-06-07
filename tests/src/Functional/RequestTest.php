@@ -200,7 +200,7 @@ class RequestTest extends BrowserTestBase {
       $expected['id'] = str_replace('{base_url}', $this->baseUrl, $expected['id']);
       $decoded_response = json_decode($contents, TRUE);
       $this->assertFalse(empty($contents), "CONTENTS EMPTY for $format, $entity_type_id, $bundle_name");
-      $this->assertEquals($expected, $decoded_response, "Response did not match expected file: $file_name");
+      $this->assertEquals($expected, $decoded_response, "The response did not match expected file: $file_name");
     }
   }
 
