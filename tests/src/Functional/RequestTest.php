@@ -80,6 +80,8 @@ class RequestTest extends BrowserTestBase {
    * Tests schemata requests.
    */
   public function testRequests() {
+    $ser = $this->container->get('serializer');
+    $this->assertTrue(FALSE, "class: " . get_class($ser));
     /** @var \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager */
     $entity_type_manager = $this->container->get('entity_type.manager');
 
