@@ -31,8 +31,8 @@ class RequestTest extends BrowserTestBase {
     'taxonomy',
     'serialization',
     'hal',
-    'schemata',
-    'schemata_json_schema',
+   /* 'schemata',
+    'schemata_json_schema',*/
   ];
 
   /**
@@ -75,6 +75,7 @@ class RequestTest extends BrowserTestBase {
         ->setTranslatable(FALSE)
         ->save();
     }
+    $this->container->get('module_installer')->install(['schemata','schemata_json_schema']);
     $this->container->get('router.builder')->rebuild();
     $this->drupalLogin($this->drupalCreateUser(['access schemata data models']));
   }
@@ -102,7 +103,7 @@ class RequestTest extends BrowserTestBase {
         if ($bundle_type = $entity_type->getBundleEntityType()) {
           $bundles = $entity_type_manager->getStorage($bundle_type)->loadMultiple();
           foreach ($bundles as $bundle) {
-            $response = $this->request('GET', Url::fromRoute("schemata.$entity_type_id:{$bundle->id()}fake", [], $options), []);
+            $response = $this->request('GET', Url::fromRoute("schemata.$entity_type_id:{$bundle->id()}", [], $options), []);
             $this->checkExpectedResponse($response, $format, $entity_type_id, $bundle->id());
           }
         }
