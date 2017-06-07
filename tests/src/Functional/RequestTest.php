@@ -102,7 +102,7 @@ class RequestTest extends BrowserTestBase {
         if ($bundle_type = $entity_type->getBundleEntityType()) {
           $bundles = $entity_type_manager->getStorage($bundle_type)->loadMultiple();
           foreach ($bundles as $bundle) {
-            $response = $this->request('GET', Url::fromRoute("schemata.$entity_type_id:{$bundle->id()}", [], $options), []);
+            $response = $this->request('GET', Url::fromRoute("schemata.$entity_type_id:{$bundle->id()}fake", [], $options), []);
             $this->checkExpectedResponse($response, $format, $entity_type_id, $bundle->id());
           }
         }
