@@ -80,8 +80,6 @@ class RequestTest extends BrowserTestBase {
    * Tests schemata requests.
    */
   public function testRequests() {
-    $ser = $this->container->get('serializer');
-    $this->assertTrue(FALSE, "class: " . get_class($ser));
     /** @var \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager */
     $entity_type_manager = $this->container->get('entity_type.manager');
 
@@ -194,7 +192,7 @@ class RequestTest extends BrowserTestBase {
       // incorrect.
       $expected = json_decode(file_get_contents($file_name), TRUE);
       $decoded_response = json_decode($contents, TRUE);
-      if (empty($decoded_response)) {
+      /*if (empty($decoded_response)) {
         $this->assertTrue(FALSE, "RESPONSE BODY: " . var_export($response->getBody(), TRUE));
         if (!empty($contents)) {
           $this->assertTrue(FALSE, "CONTENTS NOT DECODED: " . var_export($contents, TRUE));
@@ -202,7 +200,7 @@ class RequestTest extends BrowserTestBase {
         else {
           $this->assertTrue(FALSE, "CONTENTS EMPTY: $contents");
         }
-      }
+      }*/
 
       $expected['id'] = str_replace('{base_url}', $this->baseUrl, $expected['id']);
       $this->assertEquals($expected, $decoded_response, "Response did not match expected file: $file_name");
