@@ -185,7 +185,7 @@ class RequestTest extends BrowserTestBase {
    */
   protected function checkExpectedResponse(ResponseInterface $response, $format, $entity_type_id, $bundle_name = NULL) {
     $this->assertEquals('200', $response->getStatusCode());
-    if (in_array($entity_type_id, ['node', 'taxonomy_term'])) {
+    if (in_array($entity_type_id, ['taxonomy_term'])) {
       $contents = $response->getBody()->getContents();
       $this->assertFalse(empty($contents), "Content not empty for $format, $entity_type_id, $bundle_name");
       $file_name = __DIR__ . "/../../expectations/";
