@@ -97,7 +97,7 @@ class Controller extends ControllerBase {
     $cacheable_dependency = (new CacheableMetadata())
       ->addCacheContexts(['url.query_args:_describes']);
     $this->response->addCacheableDependency($cacheable_dependency);
-    $this->response->setContent($content);
+      $this->response->setContent($content);
     $this->response->headers->set('Content-Type', $request->getMimeType($parts[0]));
     return $this->response;
   }
