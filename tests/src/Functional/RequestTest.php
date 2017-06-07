@@ -23,6 +23,9 @@ class RequestTest extends BrowserTestBase {
    * {@inheritdoc}
    */
   public static $modules = [
+    'user',
+    'field',
+    'filter',
     'text',
     'node',
     'taxonomy',
@@ -162,6 +165,9 @@ class RequestTest extends BrowserTestBase {
         }
       }
     }
+    else {
+      $this->assertTrue(FALSE, "NOT BrowserKitDriver");
+    }
     return $request_options;
   }
 
@@ -191,18 +197,9 @@ class RequestTest extends BrowserTestBase {
       // Compare decoded json to so that failure will indicate which element is
       // incorrect.
       $expected = json_decode(file_get_contents($file_name), TRUE);
-      $decoded_response = json_decode($contents, TRUE);
-      /*if (empty($decoded_response)) {
-        $this->assertTrue(FALSE, "RESPONSE BODY: " . var_export($response->getBody(), TRUE));
-        if (!empty($contents)) {
-          $this->assertTrue(FALSE, "CONTENTS NOT DECODED: " . var_export($contents, TRUE));
-        }
-        else {
-          $this->assertTrue(FALSE, "CONTENTS EMPTY: $contents");
-        }
-      }*/
-
       $expected['id'] = str_replace('{base_url}', $this->baseUrl, $expected['id']);
+      $decoded_response = json_decode($contents, TRUE);
+      $this->assertFalse(empty($contents), "CONTENTS EMPTY for $format, $entity_type_id, $bundle_name");
       $this->assertEquals($expected, $decoded_response, "Response did not match expected file: $file_name");
     }
   }
