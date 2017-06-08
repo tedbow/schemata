@@ -1,6 +1,6 @@
 {
   "$schema": "http:\/\/json-schema.org\/draft-04\/schema#",
-  "id": "{base_url}\/d8_openapi\/schemata\/node\/camelids?_format=schema_json&_describes=api_json",
+  "id": "{base_url}\/schemata\/node\/camelids?_format=schema_json&_describes=api_json",
   "type": "object",
   "title": "node:camelids Schema",
   "description": "Describes the payload for 'node' entities of the 'camelids' bundle.",
