@@ -15,7 +15,7 @@ class SchemataHalServiceProvider implements ServiceProviderInterface {
    * {@inheritdoc}
    */
   public function register(ContainerBuilder $container) {
-    $modules = $container->getParameter(('container.modules'));
+    $modules = $container->getParameter('container.modules');
     if (!isset($modules['hal'])) {
       return;
     }
