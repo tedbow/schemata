@@ -101,7 +101,7 @@ class RequestTest extends BrowserTestBase {
   }
 
   /**
-   * Makes schema requests and checks the response.
+   * Makes schema request and checks the response.
    *
    * @param string $format
    *   The described format.
