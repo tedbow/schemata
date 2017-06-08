@@ -82,7 +82,7 @@ class RequestTest extends BrowserTestBase {
     /** @var \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager */
     $entity_type_manager = $this->container->get('entity_type.manager');
 
-    foreach (['json', 'hal_json'] as $format) {
+    foreach (['api_json'] as $format) {
 
       foreach ($entity_type_manager->getDefinitions() as $entity_type_id => $entity_type) {
         // @todo Check for all entity types https://www.drupal.org/node/2870904.
