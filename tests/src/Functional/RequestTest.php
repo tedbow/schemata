@@ -19,10 +19,8 @@ class RequestTest extends BrowserTestBase {
    * Set to TRUE to run this test to generate expectation files.
    *
    * The test will be marked as a fail when generating test files.
-   *
-   * @var bool
    */
-  protected $generateExpectationFiles = FALSE;
+  const GENERATE_EXPECTATION_FILES = FALSE;
 
   /**
    * {@inheritdoc}
@@ -106,7 +104,7 @@ class RequestTest extends BrowserTestBase {
         }
       }
     }
-    if ($this->generateExpectationFiles) {
+    if (static::GENERATE_EXPECTATION_FILES) {
       $this->fail('Expectation fails generated. Tests not run.');
     }
 
@@ -141,7 +139,7 @@ class RequestTest extends BrowserTestBase {
         $file_name .= "$entity_type_id.$format.json";
       }
 
-      if ($this->generateExpectationFiles) {
+      if (static::GENERATE_EXPECTATION_FILES) {
         $this->saveExpectationFile($file_name, $contents);
         // Response assertion is not performed when generating expectation
         // files.
@@ -166,7 +164,7 @@ class RequestTest extends BrowserTestBase {
    * @param string $contents
    *   The JSON response contents.
    *
-   * @see \Drupal\Tests\schemata\Functional\RequestTest::$generateExpectationFiles
+   * @see \Drupal\Tests\schemata\Functional\RequestTest::GENERATE_EXPECTATION_FILES
    */
   protected function saveExpectationFile($file_name, $contents) {
     $decoded_response = json_decode($contents, TRUE);
