@@ -16,6 +16,15 @@ use Drupal\Tests\BrowserTestBase;
 class RequestTest extends BrowserTestBase {
 
   /**
+   * Set to TRUE to run this test to generate expectation files.
+   *
+   * The test will be marked as a fail when generating test files.
+   *
+   * @var bool
+   */
+  protected $generateExpectationFiles = FALSE;
+
+  /**
    * {@inheritdoc}
    */
   public static $modules = [
@@ -97,6 +106,9 @@ class RequestTest extends BrowserTestBase {
         }
       }
     }
+    if ($this->generateExpectationFiles) {
+      $this->fail('Expectation fails generated. Tests not run.');
+    }
 
   }
 
@@ -128,6 +140,14 @@ class RequestTest extends BrowserTestBase {
       else {
         $file_name .= "$entity_type_id.$format.json";
       }
+
+      if ($this->generateExpectationFiles) {
+        $this->saveExpectationFile($file_name, $contents);
+        // Response assertion is not performed when generating expectation
+        // files.
+        return;
+      }
+
       // Compare decoded json to so that failure will indicate which element is
       // incorrect.
       $expected = json_decode(file_get_contents($file_name), TRUE);
@@ -136,6 +156,25 @@ class RequestTest extends BrowserTestBase {
 
       $this->assertEquals($expected, $decoded_response, "The response matches expected file: $file_name");
     }
+  }
+
+  /**
+   * Saves an expectation file.
+   *
+   * @param string $file_name
+   *   The file name of the expectation file.
+   * @param string $contents
+   *   The JSON response contents.
+   *
+   * @see \Drupal\Tests\schemata\Functional\RequestTest::$generateExpectationFiles
+   */
+  protected function saveExpectationFile($file_name, $contents) {
+    $decoded_response = json_decode($contents, TRUE);
+    // Replace the base url because will be different for different
+    // environments.
+    $decoded_response['id'] = str_replace($this->baseUrl, '{base_url}', $decoded_response['id']);
+    $re_encode = json_encode($decoded_response, JSON_PRETTY_PRINT);
+    file_put_contents($file_name, $re_encode);
   }
 
 }
