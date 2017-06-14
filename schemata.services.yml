@@ -10,7 +10,7 @@ services:
   # Drupal\schemata\Schema\SchemaInterface.
   schemata.schema_factory:
     class: Drupal\schemata\SchemaFactory
-    arguments: ['@entity_type.manager', '@entity_type.bundle.info', '@typed_data_manager', '@config.typed']
+    arguments: ['@logger.channel.schemata', '@entity_type.manager', '@entity_type.bundle.info', '@typed_data_manager', '@config.typed']
 
   # Create a log channel for this module. This simplifies logging setup code in
   # this code that will do logging. As a tradeoff, it also adds this fairly
