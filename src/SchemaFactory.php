@@ -6,6 +6,7 @@ use Psr\Log\LoggerInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Entity\EntityTypeBundleInfo;
 use Drupal\Core\TypedData\TypedDataManager;
+use Drupal\Core\Config\Entity\ConfigEntityType;
 
 /**
  * Create an object of type Drupal\schemata\Schema\SchemaInterface.
@@ -103,6 +104,9 @@ class SchemaFactory {
     if ($entity_type == 'node' && !empty($bundle)) {
       $class = '\Drupal\schemata\Schema\NodeSchema';
     }
+    else if ($entity_type_plugin instanceof ConfigEntityType) {
+      $class = '\Drupal\schemata\Schema\ConfigSchema';
+    }
     else {
       $class = '\Drupal\schemata\Schema\Schema';
     }
@@ -143,14 +147,7 @@ class SchemaFactory {
    * @see \Drupal\Tests\schemata\Functional\ValidateSchemaTest::validateSchemaAsJsonSchema()
    */
   public function getSourceEntityPlugin($entity_type_id) {
-    $entity_type_plugin = $this->entityTypeManager->getDefinition($entity_type_id);
-    if (!($entity_type_plugin->isSubclassOf('\Drupal\Core\Entity\ContentEntityInterface'))) {
-      throw new \InvalidArgumentException(sprintf('Entity Type %s is not a content entity. Only content entities are supported at this time.', $entity_type_id));
-    }
-
-    return $entity_type_plugin;
+    return $this->entityTypeManager->getDefinition($entity_type_id);
   }
-
-
 
 }

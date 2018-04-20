@@ -70,6 +70,7 @@ class SchemataSchemaNormalizer extends JsonApiNormalizerBase {
         ],
       ],
     ];
+
     return NestedArray::mergeDeep($normalized, $entity->getMetadata(), $properties, $links);
   }
 

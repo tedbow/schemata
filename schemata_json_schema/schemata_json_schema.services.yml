@@ -79,6 +79,10 @@ services:
     class: Drupal\schemata_json_schema\Normalizer\jsonapi\SchemataSchemaNormalizer
     tags:
       - { name: normalizer, priority: 10 }
+  serializer.normalizer.schema_definition.schema_json.jsonapi:
+    class: Drupal\schemata_json_schema\Normalizer\jsonapi\SchemaDataDefinitionNormalizer
+    tags:
+      - { name: normalizer, priority: 40 }
   # ----------------------------------------------------------------------------
   # - 3. HAL+JSON format.
   # ----------------------------------------------------------------------------

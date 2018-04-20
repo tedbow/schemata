@@ -56,8 +56,6 @@ class DataReferenceDefinitionNormalizer extends DataDefinitionNormalizer {
   /**
    * Ensure the entity type is one we support for schema reference.
    *
-   * If somehow the entity does not exist, or is not a ContentEntity, skip it.
-   *
    * @param mixed $entity
    *   The object to be normalized.
    *
@@ -73,8 +71,7 @@ class DataReferenceDefinitionNormalizer extends DataDefinitionNormalizer {
     }
 
     $entity_type_plugin = $this->entityTypeManager->getDefinition($entity->getConstraint('EntityType'), FALSE);
-    if (empty($entity_type_plugin)
-      || !($entity_type_plugin->isSubclassOf('\Drupal\Core\Entity\ContentEntityInterface'))) {
+    if (empty($entity_type_plugin)) {
       return FALSE;
     }
 

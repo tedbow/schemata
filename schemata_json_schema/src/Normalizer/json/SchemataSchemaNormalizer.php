@@ -2,6 +2,7 @@
 
 namespace Drupal\schemata_json_schema\Normalizer\json;
 
+use Drupal\schemata\Schema\ConfigSchema;
 use Drupal\schemata\Schema\SchemaInterface;
 use Drupal\Component\Utility\NestedArray;
 use Drupal\schemata\SchemaUrl;
